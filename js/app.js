@@ -56,3 +56,21 @@ function checkAnswer() {
     feedback.style.color = 'red';
   }
 }
+
+ const popup = document.getElementById("popup");
+    const clickImage = document.getElementById("clickImage");
+    const closePopup = document.getElementById("closePopup");
+
+    clickImage.addEventListener("click", () => {
+        popup.style.display = "flex";
+    });
+
+    closePopup.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
+
+    popup.addEventListener("click", (e) => {
+        if (e.target === popup) {
+            popup.style.display = "none";
+        }
+    });
