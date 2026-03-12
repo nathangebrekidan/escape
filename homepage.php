@@ -93,5 +93,8 @@ The stability is crumbling...
     </div>
 </div>
 </div>
+
+    <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
+
 </body>
 </html>
