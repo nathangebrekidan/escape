@@ -19,6 +19,9 @@
   <button><a href="./rooms/room_1.php">Klik hier voor een demonstratie van kamer
       1</a></button>
 
+
+    <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
+
 </body>
 
 </html>

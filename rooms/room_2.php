@@ -41,6 +41,8 @@ try {
     <p id="feedback"></p>
   </section>
 
+    <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
+
   <script src="../js/app.js"></script>
 
 </body>

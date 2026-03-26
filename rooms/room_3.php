@@ -65,6 +65,9 @@ function show(i){
     if(i==1) document.getElementById("b3").classList.remove("hidden");
 }
 </script>
+    <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
+
+  <script src="../js/app.js"></script>
 
 </body>
 </html>
