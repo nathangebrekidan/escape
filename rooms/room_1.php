@@ -2,7 +2,7 @@
 require_once('../dbcon.php');
 
 try {
-  $stmt = $db_connection->query("SELECT * FROM riddles WHERE roomId = 1");
+  $stmt = $db_connection->query("SELECT * FROM riddle WHERE ");
   $riddles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
   die("Databasefout: " . $e->getMessage());
@@ -17,10 +17,13 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Escape Room 3</title>
   <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/app.js"></script>
 </head>
 
 <body>
   <h1>Team: ...</h1>
+
+  <div id="timer" class="timer">00:00</div>
 
   <div class="container">
     <?php foreach ($riddles as $index => $riddle) : ?>
@@ -43,8 +46,6 @@ try {
   </section>
 
     <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
-
-  <script src="../js/app.js"></script>
 
 </body>
 

@@ -74,3 +74,61 @@ function checkAnswer() {
             popup.style.display = "none";
         }
     });
+
+    const glitch = document.querySelector(".glitch");
+
+setInterval(() => {
+    glitch.style.transform = `translate(${Math.random()*4-2}px, ${Math.random()*4-2}px)`;
+    
+    setTimeout(() => {
+        glitch.style.transform = "none";
+    }, 100);
+}, 2000);
+
+const text = "The stability is crumbling...";
+const glitchEl = document.querySelector(".glitch");
+
+setInterval(() => {
+    let broken = text.split("").map(letter => {
+        return Math.random() > 0.9 
+            ? String.fromCharCode(33 + Math.random()*94) 
+            : letter;
+    }).join("");
+
+    glitchEl.innerText = broken;
+
+    setTimeout(() => {
+        glitchEl.innerText = text;
+    }, 100);
+}, 1500);
+
+const TOTAL_TIME = 120;
+
+function startTimer() {
+    let timeLeft = localStorage.getItem("timeLeft");
+
+    if (!timeLeft) {
+        timeLeft = TOTAL_TIME;
+    }
+
+    const timerElement = document.getElementById("timer");
+
+    const countdown = setInterval(() => {
+        timeLeft--;
+
+        localStorage.setItem("timeLeft", timeLeft);
+
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+
+        timerElement.innerHTML =
+            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            localStorage.clear();
+            window.location.href = "../lose.html";
+        }
+
+    }, 1000);
+}

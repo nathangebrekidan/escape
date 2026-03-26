@@ -14,71 +14,69 @@
 </head>
 
 <body>
-    <video autoplay muted loop id="bg-video">
+  <video autoplay muted loop id="bg-video">
     <source src="../escape/Vids/Simlock.mp4" type="video/mp4">
 </video>
 
-<div class="header">
+<header class="header">
     <div class="logo">Escape room</div>
 
-    <div class="menu">
+    <nav class="menu">
         <button>Menu</button>
         <button>Creators</button>
         <button>Review</button>
         <button>Account</button>
-    </div>
-</div>
+    </nav>
+</header>
 
+<main>
 
-<div class="main">
+    <section class="intro">
+        <h1 class="title">
+            Simlock: Escape the simulation!
+        </h1>
 
-<div class="title">
- Simlock: Escape the simulation!
-</div>
+        <p class="subtitle">
+            Find the clues, solve puzzles, escape before the timer runs out!
+        </p>
+    </section>
 
-<div class="subtitle">
-Find the clues, solve puzzles, escape before the timer runs out!
-</div>
+    <section class="content">
 
-<div class="content">
+        <div class="image-box">
+            <img src="../escape/img/Envelope photo.png" alt="Mysterious Envelope" id="clickImage">
+        </div>
 
-<div class="image-box">
-    <img src="../escape/img/Envelope photo.png" alt="Mysterious Envelope" id="clickImage">
-</div>
+        <aside class="side-panel">
+            <h2>Top scores</h2>
 
-<div class="side-panel">
+            <h3>Your top scores</h3>
+            <ul>
+                <li>-</li>
+                <li>-</li>
+                <li>-</li>
+            </ul>
 
-<h2>Top scores</h2>
+            <h3>Make your team</h3>
+            <div>
+                <button>Make team</button>
+            </div>
+        </aside>
 
-<h3>Your top scores</h3>
-<ul>
-<li>-</li>
-<li>-</li>
-<li>-</li>
-</ul>
+    </section>
 
-<h3>Make your team</h3>
-<div>
-  <button >Make team</button>
-</div>
+    <section class="buttons">
+        <button>Difficulty</button>
+        <button>Start the escape</button>
+        <button>Clues</button>
+    </section>
 
-</div>
+    <section class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="closePopup">&times;</span>
 
-</div>
+            <h2 class="popup-text">Do not panic!</h2>
 
-<div class="buttons">
-<button>Difficulty</button>
-<button>Start the escape</button>
-<button>Clues</button>
-</div>
-
-<div class="footer">
-The stability is crumbling...
-</div>
-  <div class="popup" id="popup">
-    <div class="popup-content">
-        <span class="close-btn" id="closePopup">&times;</span>
-        <h2 class="popup-text">Do not panic!</h2>
             <p class="popup-text">
                 If you are reading this, it means that this letter has made it safely to the other side. I am writing this letter to you in the hope that it will help you escape from this simulation. Now I know this must sound crazy to you right now, but trust me, you are not in the real world. You are trapped in a simulation as an experiment, and the experience the higher-ups have planned for you are... sinister, to say the least.<br>
                 <br>
@@ -90,11 +88,18 @@ The stability is crumbling...
                 <br>
                 Researcher 17
             </p>
-    </div>
-</div>
-</div>
+        </div>
+    </section>
 
-    <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
+    <section class="glitch" data-text="The stability is crumbling...">
+        The stability is crumbling...
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026 Abenezer, Yannick & Nathan
+</footer>
 
 </body>
 </html>

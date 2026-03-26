@@ -72,7 +72,7 @@ button {
     z-index: -1;
 }
 
-.main {
+main {
     width: 100%;
     min-height: 100vh;
     padding-top: 0;
@@ -255,7 +255,7 @@ button {
     float: right;
 }
 
-.footer {
+footer {
     width: 100%;
     padding: 8px 20px;
     background: darkblue;
@@ -265,4 +265,55 @@ button {
     text-align: center;
     box-sizing: border-box;
     margin-top: 55px;
+}
+
+.glitch {
+    position: relative;
+    font-size: 24px;
+    color: white;
+    animation: glitch 1s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: "The stability is crumbling...";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    content: attr(data-text);
+}
+
+.glitch::before {
+    color: red;
+    z-index: -1;
+    animation: glitchTop 0.8s infinite;
+}
+
+.glitch::after {
+    color: cyan;
+    z-index: -2;
+    animation: glitchBottom 0.8s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: none; }
+    20% { transform: skew(-2deg); }
+    40% { transform: skew(2deg); }
+    60% { transform: skew(-1deg); }
+    80% { transform: skew(1deg); }
+    100% { transform: none; }
+}
+
+@keyframes glitchTop {
+    0% { clip-path: inset(0 0 80% 0); transform: translate(-2px, -2px); }
+    50% { clip-path: inset(0 0 60% 0); transform: translate(2px, 2px); }
+    100% { clip-path: inset(0 0 80% 0); transform: translate(-1px, 1px); }
+}
+
+@keyframes glitchBottom {
+    0% { clip-path: inset(80% 0 0 0); transform: translate(2px, 2px); }
+    50% { clip-path: inset(60% 0 0 0); transform: translate(-2px, -2px); }
+    100% { clip-path: inset(80% 0 0 0); transform: translate(1px, -1px); }
 }
