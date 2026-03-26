@@ -102,33 +102,72 @@ setInterval(() => {
     }, 100);
 }, 1500);
 
-const TOTAL_TIME = 120;
+let totalTime = 15 * 60;
+let timerEl = document.getElementById('timer');
+let currentRoom = 1;
+let totalRooms = 3;
+let timerInterval;
 
 function startTimer() {
-    let timeLeft = localStorage.getItem("timeLeft");
-
-    if (!timeLeft) {
-        timeLeft = TOTAL_TIME;
-    }
-
-    const timerElement = document.getElementById("timer");
-
-    const countdown = setInterval(() => {
-        timeLeft--;
-
-        localStorage.setItem("timeLeft", timeLeft);
-
-        let minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-
-        timerElement.innerHTML =
-            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            localStorage.clear();
-            window.location.href = "../lose.html";
+    timerInterval = setInterval(() => {
+        if (totalTime <= 0) {
+            clearInterval(timerInterval);
+            window.location.href = 'lose_page.php';
+        } else {
+            totalTime--;
+            displayTime(totalTime);
         }
-
     }, 1000);
 }
+
+function displayTime(seconds) {
+    let m = Math.floor(seconds / 60);
+    let s = seconds % 60;
+    timerEl.innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+}
+
+function roomCompleted() {
+    if (currentRoom < totalRooms) {
+        currentRoom++;
+        alert(`Kamer ${currentRoom - 1} voltooid! Ga door naar kamer ${currentRoom}.`);
+        loadRoom(currentRoom);
+    } else {
+        clearInterval(timerInterval);
+        window.location.href = 'win_page.php';
+    }
+}
+
+function loadRoom(roomNumber) {
+    console.log('Load room:', roomNumber);
+}
+
+let correctAnswers = 0;
+let totalRiddles = document.querySelectorAll('.container .box').length; // of per room
+
+function checkAnswer() {
+    let userAnswer = document.getElementById('answer').value.trim();
+    let correctAnswer = document.getElementById('modal').dataset.answer;
+    let feedback = document.getElementById('feedback');
+
+    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        feedback.innerText = 'Correct! Goed gedaan!';
+        feedback.style.color = 'green';
+        correctAnswers++;
+
+        setTimeout(() => {
+            closeModal();
+
+            if (correctAnswers === totalRiddles) {
+                roomCompleted();
+                correctAnswers = 0;
+            }
+        }, 1000);
+    } else {
+        feedback.innerText = 'Fout, probeer opnieuw!';
+        feedback.style.color = 'red';
+    }
+}
+
+window.addEventListener('load', () => {
+    startTimer();
+});

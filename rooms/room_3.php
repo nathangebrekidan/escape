@@ -4,7 +4,7 @@ require_once('../dbcon.php');
 
 
 if (!isset($_SESSION['t3'])) $_SESSION['t3'] = time();
-$left = 90 - (time() - $_SESSION['t3']);
+$left = 9000 - (time() - $_SESSION['t3']);
 if ($left <= 0) header("Location: lose.php");
 
 

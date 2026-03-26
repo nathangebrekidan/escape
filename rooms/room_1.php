@@ -2,7 +2,7 @@
 require_once('../dbcon.php');
 
 try {
-  $stmt = $db_connection->query("SELECT * FROM riddle WHERE ");
+  $stmt = $db_connection->prepare("SELECT * FROM riddles WHERE ");
   $riddles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
   die("Databasefout: " . $e->getMessage());
