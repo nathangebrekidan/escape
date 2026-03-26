@@ -6,15 +6,18 @@ CREATE TABLE riddles (
     roomId INT NOT NULL
 );
 
--- Let op, dit is een voorbeeld!
-INSERT INTO riddles (riddle, answer, hint, roomId)
-VALUES
-    ('Welke Pokémon is nummer 25 in de Pokédex?', 'Pikachu', 'Het is de mascotte van Pokémon.', 1),
-    ('Wat is het type van Charmander?', 'Vuur', 'Denk aan zijn vlammende staart.', 1),
-    ('Hoe heet de evolutie van Bulbasaur?', 'Ivysaur', 'Het zit tussen Bulbasaur en Venusaur.', 1),
-    ('Wat gebeurt er als Magikarp level 20 bereikt?', 'Gyarados', 'Van nutteloos naar legendarisch!', 2),
-    ('Wat is super effectief tegen een water-type Pokémon?', 'Gras', 'Denk aan elementaire logica: wat groeit in water?', 2),
-    ('Welke legendarische vogel hoort bij het element ijs?', 'Articuno', 'Zijn naam begint met "Arti...".', 2),
-    ('Wat is de naam van de professor in de eerste Pokémon-games?', 'Professor Oak', 'Hij deelt je eerste Pokémon uit.', 3),
-    ('Welke kleur heeft shiny Charizard?', 'Zwart', 'Anders dan zijn originele oranje kleur.', 3),
-    ('Wat gebruik je om een wilde Pokémon te vangen?', 'Pokéball', 'Je gooit het naar een Pokémon.', 3);
+INSERT INTO riddles (riddle, hint, answer, roomId) VALUES
+
+("Er staan vier bekers met gekleurde vloeistoffen: rood, blauw, groen en geel. Meng rood met blauw, blauw met geel en rood met groen. Hoeveel unieke kleuren ontstaan als we alle mengsels tellen?", "Mengsels van dezelfde kleuren tellen als één", "3", 1),
+("Er staat een flesje met ethanol op tafel. In dit molecuul zijn er koolstofatomen, waterstofatomen en zuurstofatomen. Wat is het aantal waterstofatomen in ethanol?", "Ethanol: C2H6O", "6", 1),
+("ATG CGT TAA GGC. Wat is het laatste cijfer van de code?", "Aantal codons dat start met T modulo 4", "1", 1),
+
+
+("Je vindt een kaartje met de code 010-B-3. Het verwijst naar een plek in de bibliotheek. Waar staat de B voor?", "Denk aan categorieën in een bibliotheek", "Boekensectie", 2),
+("In de Centrale Bibliotheek Rotterdam staat een beroemd standbeeld van een schrijver. Wie is het?", "Zijn naam begint met M", "Multatuli", 2),
+("Je moet drie boeken vinden. De code zegt: 'Neem het boek met het laagste nummer in sectie R'. Wat betekent de R?", "R = Rotterdam boeken", "Rotterdam-collectie", 2),
+
+
+("Ik ben een brug die lijkt op een zwaan en ik verbind Noord en Zuid. Wat ben ik?", "Je ziet me op bijna elke Rotterdam foto", "Erasmusbrug", 3),
+("Ik ben een stadion waar duizenden mensen zingen en schreeuwen. Wat ben ik?", "De trots van Zuid", "De Kuip", 3),
+("Ik ben een hoge toren waar je de hele stad kunt zien. Wat ben ik?", "Je kunt er in een lift omhoog", "Euromast", 3);

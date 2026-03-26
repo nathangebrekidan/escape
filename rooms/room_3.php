@@ -1,50 +1,73 @@
 <?php
+session_start();
 require_once('../dbcon.php');
 
-try {
-  $stmt = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3");
-  $riddles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-  die("Databasefout: " . $e->getMessage());
+
+if (!isset($_SESSION['t3'])) $_SESSION['t3'] = time();
+$left = 90 - (time() - $_SESSION['t3']);
+if ($left <= 0) header("Location: lose.php");
+
+
+$q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3");
+$r = $q->fetchAll(PDO::FETCH_ASSOC);
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $ok = true;
+    foreach ($r as $i => $v) {
+        if (strtolower($_POST["a$i"]) != strtolower($v['answer'])) $ok = false;
+    }
+    if ($ok) {
+        unset($_SESSION['t3']);
+        header("Location: win.php");
+    } else $err = "Fout antwoord.";
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escape Room 3</title>
-  <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/style.css">
+<script>
+let t = <?php echo $left; ?>;
+function timer(){
+    document.getElementById("tijd").innerHTML = t;
+    if(t<=0) location="lose.php";
+    t--; setTimeout(timer,1000);
+}
+</script>
 </head>
 
-<body>
+<body onload="timer()">
 
-  <div class="container">
-    <?php foreach ($riddles as $index => $riddle) : ?>
-    <div class="box box<?php echo $index + 1; ?>" onclick="openModal(<?php echo $index; ?>)"
-      data-index="<?php echo $index; ?>" data-riddle="<?php echo htmlspecialchars($riddle['riddle']); ?>"
-      data-answer="<?php echo htmlspecialchars($riddle['answer']); ?>">
-      Box <?php echo $index + 1; ?>
-    </div>
-    <?php endforeach; ?>
-  </div>
+<h2>Tijd: <span id="tijd"></span></h2>
+<?php if(isset($err)) echo "<p style='color:red;'>$err</p>"; ?>
 
-  <section class="overlay" id="overlay" onclick="closeModal()"></section>
+<div class="container">
+    <div class="box" onclick="show(0)">Puzzel 1</div>
+    <div class="box hidden" id="b2" onclick="show(1)">Puzzel 2</div>
+    <div class="box hidden" id="b3" onclick="show(2)">Puzzel 3</div>
+</div>
 
-  <section class="modal" id="modal">
-    <h2>Escape Room Vraag</h2>
-    <p id="riddle"></p>
-    <input type="text" id="answer" placeholder="Typ je antwoord">
-    <button onclick="checkAnswer()">Verzenden</button>
-    <p id="feedback"></p>
-  </section>
+<form method="POST" id="f" class="hidden">
+    <p id="vraag"></p>
+    <input type="text" id="inp" name="a0">
+    <button>Check</button>
+</form>
 
+<script>
+let v = <?php echo json_encode($r); ?>;
+
+function show(i){
+    document.getElementById("f").classList.remove("hidden");
+    document.getElementById("vraag").innerHTML = v[i].riddle;
+    document.getElementById("inp").name = "a"+i;
+
+    if(i==0) document.getElementById("b2").classList.remove("hidden");
+    if(i==1) document.getElementById("b3").classList.remove("hidden");
+}
+</script>
     <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
 
   <script src="../js/app.js"></script>
 
 </body>
-
 </html>
