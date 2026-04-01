@@ -320,3 +320,22 @@ footer {
     50% { clip-path: inset(60% 0 0 0); transform: translate(-2px, -2px); }
     100% { clip-path: inset(80% 0 0 0); transform: translate(1px, -1px); }
 }
+
+.vakje {
+  padding: 15px;
+  background: #4a90e2;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  width: 120px;
+}
+
+.vakje:hover {
+  background: #3b78bd;
+}
+
+.hidden {
+  display: none;
+}
