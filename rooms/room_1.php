@@ -23,7 +23,7 @@ try {
 <body>
   <h1>Team: ...</h1>
 
-  <div id="timer" class="timer">00:00</div>
+  <div id="timer" class="timer">5:00</div>
 
   <div class="container">
     <?php foreach ($riddles as $index => $riddle) : ?>
