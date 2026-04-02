@@ -3,9 +3,15 @@ session_start();
 require_once('../dbcon.php');
 
 
-if (!isset($_SESSION['t3'])) $_SESSION['t3'] = time();
+if (!isset($_SESSION['t3'])) {
+    $_SESSION['t3'] = time();
+}
+
 $left = 90 - (time() - $_SESSION['t3']);
-if ($left <= 200) {
+
+
+if ($left <= 0) {
+    unset($_SESSION['t3']);
     header("Location: lose_page.php");
     exit;
 }
@@ -37,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel="stylesheet" href="../css/style.css">
 <script>
 let t = <?php echo $left; ?>;
+
 function timer(){
     document.getElementById("tijd").innerHTML = t;
     if(t <= 0) location = "lose_page.php";
@@ -75,8 +82,6 @@ function show(i){
     if(i == 1) document.getElementById("v3").classList.remove("hidden");
 }
 </script>
-
-
 
 <script src="../js/app.js"></script>
 
