@@ -59,7 +59,7 @@ function timer(){
 </script>
 </head>
 
-<body onload="timer()">
+<body class="room-body" onload="timer()">
 
 <header class="page-header">
   <h1>Escape Room 3</h1>
