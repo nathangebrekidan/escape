@@ -21,6 +21,11 @@ try {
 
 <body>
 
+<header class="page-header">
+  <h1>Escape Room 2</h1>
+  <p>Vervolgdraad ontdekt! Los ze op met flash.</p>
+</header>
+
   <div class="container">
     <?php foreach ($riddles as $index => $riddle) : ?>
     <div class="box box<?php echo $index + 1; ?>" onclick="openModal(<?php echo $index; ?>)"

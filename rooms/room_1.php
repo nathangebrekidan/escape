@@ -22,6 +22,11 @@ try {
 
 <body class="backbody">
 
+<header class="page-header">
+  <h1>Escape Room 1</h1>
+  <p>Oplossen voordat de klok aftelt - Succes!</p>
+</header>
+
 <div id="timer">05:00</div>
 
 <div id="room">

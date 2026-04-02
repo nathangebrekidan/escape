@@ -85,7 +85,7 @@ setInterval(() => {
     }, 100);
 }, 1500);
 
-// TIMER 300 SEC
+/
 let timeLeft = 300;
 
 function startTimer() {

@@ -61,8 +61,15 @@ function timer(){
 
 <body onload="timer()">
 
-<h2>Tijd: <span id="tijd"></span></h2>
-<?php if(isset($err)) echo "<p style='color:red;'>$err</p>"; ?>
+<header class="page-header">
+  <h1>Escape Room 3</h1>
+  <p>Laatste kamer, ultime kans. Een fout is kostbaar.</p>
+</header>
+
+<div class="riddle-form">
+  <h2>Tijd: <span id="tijd"></span></h2>
+  <?php if(isset($err)) echo "<p style='color:red;'>$err</p>"; ?>
+</div>
 
 <div class="container">
     <div class="vakje" onclick="show(0)">Raadsel A</div>
