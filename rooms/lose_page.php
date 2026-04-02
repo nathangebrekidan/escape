@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Lose</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 150px;
+        }
+        h1 {
+            font-size: 60px;
+        }
+        a {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        a:hover {
+            background-color: red;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <main>
-        <h3 class="winlosepage">Je tijd is op helaas...</h3>
-        <h5 class="winlosepage">Je bent niet op tijd terug in de echte wereld.</h5>
-
-        <div>
-            <p>Tijd:</p>
-            <p>00.00.00</p>
-        </div>  
-        <div>
-            <p>Hints.</p>
-            <p></p>
-        </div> 
-    
-    
-
-        <button class="winlose_button" id="homepagebutton">Back to homepage</button>
-        <button class="winlose_button" id="restartbutton">Speel het nog een keer</button>
-    </main>
-
-
-        <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
-
-    <script src="../js/app.js"></script>
+    <h1>Je hebt verloren!</h1>
+    <p>Probeer opnieuw.</p>
+    <br>
+    <a href="../homepage.php">Terug naar start</a>
 </body>
 </html>
