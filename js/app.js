@@ -104,7 +104,7 @@ function startTimer() {
 
     if (timeLeft < 0) {
       clearInterval(interval);
-      window.location.href = "../rooms/lose_page.php";
+      window.location.href = "/escape/rooms/lose_page.php";
     }
   }, 1000);
 }

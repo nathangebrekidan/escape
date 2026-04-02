@@ -2,13 +2,19 @@
 session_start();
 require_once('../dbcon.php');
 
+// Als je opnieuw start vanuit lose/win of handmatig refresh met restart-parameter.
+if (isset($_GET['restart']) && $_GET['restart'] === '1') {
+    unset($_SESSION['t3']);
+}
 
 if (!isset($_SESSION['t3'])) {
     $_SESSION['t3'] = time();
 }
 
 $left = 90 - (time() - $_SESSION['t3']);
-
+if ($left < 0) {
+    $left = 0;
+}
 
 if ($left <= 0) {
     unset($_SESSION['t3']);

@@ -29,8 +29,8 @@
         </div> 
     
 
-        <button class="winlose_button" id="homepagebutton">Back to homepage</button>
-        <button class="winlose_button" id="restartbutton">Opnieuw starten</button>
+        <a href="../homepage.php" class="winlose_button">Back to homepage</a>
+        <a href="../rooms/room_3.php?restart=1" class="winlose_button">Opnieuw starten kamer 3</a>
     </main>
 
     <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
