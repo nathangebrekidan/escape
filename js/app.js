@@ -105,7 +105,7 @@ setInterval(() => {
     }, 100);
 }, 1500);
 
-let timeLeft = 300;
+let timeLeft = 50000000;
 
 function startTimer() {
   const timerElement = document.getElementById("timer");

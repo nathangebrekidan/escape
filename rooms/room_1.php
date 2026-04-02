@@ -26,6 +26,8 @@ try {
 
 <div id="room">
   <img src="../img/Tafel.png" alt="Table">
+  <img src="../img/Safe.png" alt="Kluis">
+  <img src="../img/Safe_open.png" alt="Kluis geopend">
 </div>
 
   <div class="container">
