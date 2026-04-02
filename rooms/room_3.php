@@ -3,7 +3,7 @@ session_start();
 require_once('../dbcon.php');
 
 if (!isset($_SESSION['t3'])) $_SESSION['t3'] = time();
-$left = 9000 - (time() - $_SESSION['t3']);
+$left = 90 - (time() - $_SESSION['t3']);
 if ($left <= 0) header("Location: lose.php");
 
 $q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3");
@@ -54,12 +54,12 @@ function timer(){
 let v = <?php echo json_encode($r); ?>;
 
 function show(i){
-    f.classList.remove("hidden");
-    vraag.innerHTML = v[i].riddle;
-    inp.name = "a"+i;
+    document.getElementById("f").classList.remove("hidden");
+    document.getElementById("vraag").innerHTML = v[i].riddle;
+    document.getElementById("inp").name = "a"+i;
 
-    if(i==0) v2.classList.remove("hidden");
-    if(i==1) v3.classList.remove("hidden");
+    if(i==0) document.getElementById("v2").classList.remove("hidden");
+    if(i==1) document.getElementById("v3").classList.remove("hidden");
 }
 </script>
 
