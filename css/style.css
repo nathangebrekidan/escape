@@ -373,3 +373,83 @@ footer {
 .hidden {
   display: none;
 }
+
+.win-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    color: white;
+}
+
+.win-page main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.win-page h3 {
+    font-size: 50px;
+    margin: 0;
+    color: #ffe44a;
+}
+
+.win-page h5 {
+    font-size: 20px;
+    margin: 0;
+    color: #66ccff;
+}
+
+.lose-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    color: white;
+}
+
+.lose-page main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.lose-page h3 {
+    font-size: 50px;
+    margin: 0;
+    color: #ff6b6b;
+}
+
+.lose-page h5 {
+    font-size: 20px;
+    margin: 0;
+    color: #ff9999;
+}
+
+.win-page p,
+.lose-page p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.winlose_button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px;
+}
+
+.winlose_button:hover {
+    background: white;
+    color: darkblue;
+}
