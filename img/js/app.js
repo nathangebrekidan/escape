@@ -1,3 +1,4 @@
+console.log("Script geladen");
 // Deze functie opent de modal en toont de vraag
 function openModal(index) {
   // Zoek het element met de class 'box' en het bijbehorende data-index
@@ -57,23 +58,25 @@ function checkAnswer() {
   }
 }
 
- const popup = document.getElementById("popup");
-    const clickImage = document.getElementById("clickImage");
-    const closePopup = document.getElementById("closePopup");
+const popup = document.getElementById("popup");
+const clickImage = document.getElementById("clickImage");
+const closePopup = document.getElementById("closePopup");
 
-    clickImage.addEventListener("click", () => {
-        popup.style.display = "flex";
-    });
+if (popup && clickImage && closePopup) {
+  clickImage.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
 
-    closePopup.addEventListener("click", () => {
-        popup.style.display = "none";
-    });
+  closePopup.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
 
-    popup.addEventListener("click", (e) => {
-        if (e.target === popup) {
-            popup.style.display = "none";
-        }
-    });
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      popup.style.display = "none";
+    }
+  });
+}
 
     const glitch = document.querySelector(".glitch");
 
@@ -102,72 +105,29 @@ setInterval(() => {
     }, 100);
 }, 1500);
 
-let totalTime = 15 * 60;
-let timerEl = document.getElementById('timer');
-let currentRoom = 1;
-let totalRooms = 3;
-let timerInterval;
+let timeLeft = 500000;
 
 function startTimer() {
-    timerInterval = setInterval(() => {
-        if (totalTime <= 0) {
-            clearInterval(timerInterval);
-            window.location.href = 'lose_page.php';
-        } else {
-            totalTime--;
-            displayTime(totalTime);
-        }
-    }, 1000);
-}
+  const timerElement = document.getElementById("timer");
 
-function displayTime(seconds) {
-    let m = Math.floor(seconds / 60);
-    let s = seconds % 60;
-    timerEl.innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-}
+  if (!timerElement) return;
 
-function roomCompleted() {
-    if (currentRoom < totalRooms) {
-        currentRoom++;
-        alert(`Kamer ${currentRoom - 1} voltooid! Ga door naar kamer ${currentRoom}.`);
-        loadRoom(currentRoom);
-    } else {
-        clearInterval(timerInterval);
-        window.location.href = 'win_page.php';
+  const interval = setInterval(() => {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    timerElement.textContent = `${minutes}:${seconds}`;
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+      clearInterval(interval);
+      window.location.href = "../rooms/lose_page.php";
     }
+  }, 1000);
 }
 
-function loadRoom(roomNumber) {
-    console.log('Load room:', roomNumber);
-}
-
-let correctAnswers = 0;
-let totalRiddles = document.querySelectorAll('.container .box').length; // of per room
-
-function checkAnswer() {
-    let userAnswer = document.getElementById('answer').value.trim();
-    let correctAnswer = document.getElementById('modal').dataset.answer;
-    let feedback = document.getElementById('feedback');
-
-    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-        feedback.innerText = 'Correct! Goed gedaan!';
-        feedback.style.color = 'green';
-        correctAnswers++;
-
-        setTimeout(() => {
-            closeModal();
-
-            if (correctAnswers === totalRiddles) {
-                roomCompleted();
-                correctAnswers = 0;
-            }
-        }, 1000);
-    } else {
-        feedback.innerText = 'Fout, probeer opnieuw!';
-        feedback.style.color = 'red';
-    }
-}
-
-window.addEventListener('load', () => {
-    startTimer();
-});
+window.addEventListener("load", startTimer);

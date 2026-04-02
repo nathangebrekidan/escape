@@ -20,10 +20,13 @@ try {
   <script defer src="../js/app.js"></script>
 </head>
 
-<body>
-  <h1>Team: ...</h1>
+<body class="backbody">
 
-  <div id="timer" class="timer">00:00</div>
+<div id="timer">05:00</div>
+
+<div id="room">
+  <img src="../img/Tafel.png" alt="Table">
+</div>
 
   <div class="container">
     <?php foreach ($riddles as $index => $riddle) : ?>
@@ -44,8 +47,6 @@ try {
     <button onclick="checkAnswer()">Verzenden</button>
     <p id="feedback"></p>
   </section>
-
-    <footer> &copy; 2026 Abenezer, Yannick & Nathan</footer>
 
 </body>
 
