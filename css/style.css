@@ -276,7 +276,7 @@ main {
 
 .room-body {
   min-height: 100vh;
-  background: linear-gradient(180deg, #c40000 0%, #c40000 28%, #ffffff 28%, #ffffff 52%, #000000 52%, #000000 100%);
+  background: linear-gradient(180deg, #008753 0%, #008753 33%, #ffffff 33%, #ffffff 66%, #008753 66%, #008753 100%);
   background-attachment: fixed;
 }
 
