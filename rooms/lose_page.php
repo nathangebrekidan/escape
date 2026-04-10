@@ -31,7 +31,7 @@
     <h1>Je hebt verloren!</h1>
     <p>Probeer opnieuw.</p>
     <br>
-    <a href="../rooms/room_3.php?restart=1">Opnieuw beginnen kamer 3</a>
+    <a href="../rooms/room_1.php?restart=1">Opnieuw beginnen kamer 1</a>
     <br><br>
     <a href="../homepage.php">Terug naar start</a>
 </body>
