@@ -205,22 +205,79 @@ main {
   backdrop-filter: blur(4px);
 }
 
-.shake-btn a {
+.page-header {
+  width: 100%;
+  background: linear-gradient(120deg, #221e3f, #414bae);
   color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+  margin-bottom: 25px;
 }
 
-.shake-btn:hover a {
-  display: inline-block;
-  animation: shake 0.3s infinite;
-  color: red;
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 1px;
 }
 
-@keyframes shake {
-  0% { transform: translate(0px, 0px); }
-  25% { transform: translate(1px, -1px); }
-  50% { transform: translate(-1px, 1px); }
-  75% { transform: translate(1px, 1px); }
-  100% { transform: translate(0px, 0px); }
+.page-header p {
+  margin: 8px 0 0;
+  color: #c8d6ff;
+  font-size: 16px;
+}
+
+.box {
+  width: 140px;
+  min-height: 130px;
+  background: linear-gradient(145deg, #4f97ff, #1d63c6);
+  color: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  border: 2px solid #9bc8ff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.45);
+}
+
+.riddle-form {
+  max-width: 500px;
+  margin: 22px auto;
+  background: rgba(255,255,255,0.9);
+  border-radius: 10px;
+  padding: 18px;
+  border: 1px solid #94b3ff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+}
+
+.riddle-form p {
+  margin-bottom: 12px;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.riddle-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #a0b3cd;
+  font-size: 16px;
+}
+
+.room-body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #008753 0%, #008753 33%, #ffffff 33%, #ffffff 66%, #008753 66%, #008753 100%) !important;
+  background-attachment: fixed !important;
 }
 
 .popup {

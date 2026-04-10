@@ -118,6 +118,12 @@ function startTimer() {
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     timerElement.textContent = `${minutes}:${seconds}`;
+    timeLeft--;
+
+    if (timeLeft < 0) {
+      clearInterval(interval);
+      window.location.href = "/escape/rooms/lose_page.php";
+    }
   }, 1000);
 }
 
