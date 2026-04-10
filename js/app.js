@@ -1,17 +1,28 @@
 console.log("Script geladen");
 
+var modalSource = "";
+var currentIndex = 0;
 
-function openModal(index) {
-  let box = document.querySelector(`.box[data-index='${index}']`);
-  let riddleText = box.dataset.riddle;
-  let correctAnswer = box.dataset.answer;
+function openModal(index, source = "box") {
+  currentIndex = index;
+  modalSource = source;
 
-  document.getElementById('riddle').innerText = riddleText;
-  document.getElementById('modal').dataset.answer = correctAnswer;
-  document.getElementById('answer').value = '';
+  let boxes = document.querySelectorAll(".box");
+  
+  if (boxes[index]) {
+    let riddleText = boxes[index].dataset.riddle;
+    let correctAnswer = boxes[index].dataset.answer;
 
-  document.getElementById('overlay').style.display = 'block';
-  document.getElementById('modal').style.display = 'block';
+    document.getElementById('riddle').innerText = riddleText;
+    document.getElementById('modal').dataset.answer = correctAnswer;
+    document.getElementById('answer').value = '';
+    document.getElementById('feedback').innerText = '';
+
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('modal').style.display = 'block';
+  } else {
+    console.error("Geen riddle gevonden voor index: " + index);
+  }
 }
 
 
@@ -30,7 +41,34 @@ function checkAnswer() {
   if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
     feedback.innerText = 'Correct! Goed gedaan!';
     feedback.style.color = 'green';
-    setTimeout(closeModal, 1000);
+
+    setTimeout(() => {
+      closeModal();
+
+      if (modalSource === "drawer") {
+        drawerClosed = false;
+        document.getElementById("drawer_closed").style.visibility = "hidden";
+        document.getElementById("drawer_open").style.visibility = "visible";
+        document.getElementById("lockpick").style.visibility = "visible";
+        showMessage("De lade is open! Er zit een lockpick in.", true);
+
+      } else if (modalSource === "box") {
+        boxLocked = false;
+        document.getElementById("locked_box").style.visibility = "hidden";
+        document.getElementById("opened_box").style.visibility = "visible";
+        document.getElementById("key").style.visibility = "visible";
+        showMessage("De doos is open! Er zit een sleutel in.", true);
+
+      } else if (modalSource === "safe") {
+        safeLocked = false;
+        document.getElementById("safe_closed").style.visibility = "hidden";
+        document.getElementById("safe_open").style.visibility = "visible";
+        document.getElementById("key_card").style.visibility = "visible";
+        showMessage("De kluis is open! Er zit een Key Card in.", true);
+      }
+
+    }, 1000);
+
   } else {
     feedback.innerText = 'Fout, probeer opnieuw!';
     feedback.style.color = 'red';
@@ -202,14 +240,7 @@ function tryDrawer() {
     showMessage("The drawer is already open.");
     return;
   }
-
-  drawerClosed = false;
-
-  document.getElementById("drawer_closed").style.visibility = "hidden";
-  document.getElementById("drawer_open").style.visibility = "visible";
-  document.getElementById("lockpick").style.visibility = "visible";
-
-  showMessage("You opened the drawer. There's a lockpick inside!", true);
+  openModal(0, "drawer");
 }
 
 function pickUpLockpick() {
@@ -230,14 +261,7 @@ function tryBox() {
     showMessage("You need something to open the box.");
     return;
   }
-
-  boxLocked = false;
-
-  document.getElementById("locked_box").style.visibility = "hidden";
-  document.getElementById("opened_box").style.visibility = "visible";
-  document.getElementById("key").style.visibility = "visible";
-
-  showMessage("You opened the box! There's a key inside.", true);
+  openModal(1, "box");
 }
 
 function pickUpKey() {
@@ -266,13 +290,7 @@ function trySafe() {
     return;
   }
 
-  safeLocked = false;
-
-  document.getElementById("safe_closed").style.visibility = "hidden";
-  document.getElementById("safe_open").style.visibility = "visible";
-  document.getElementById("key_card").style.visibility = "visible";
-
-  showMessage("You opened the safe! There's a Key Card inside.", true);
+  openModal(2, "safe");
 }
 
 function tryLight() {

@@ -13,12 +13,12 @@
         h1 {
             font-size: 60px;
         }
-        a {
+        .Frr {
             color: white;
             font-size: 24px;
             text-decoration: none;
             border: 2px solid white;
-            padding: 10px 20px;
+            padding: 4px 15px;
             border-radius: 10px;
         }
         a:hover {
@@ -31,8 +31,10 @@
     <h1>Je hebt verloren!</h1>
     <p>Probeer opnieuw.</p>
     <br>
-    <a href="../rooms/room_1.php?restart=1">Opnieuw beginnen kamer 1</a>
+    <div class="Spacebtw">
+        <a href="../rooms/room_1.php?restart=1" class="Frr">Opnieuw beginnen kamer 1</a>
     <br><br>
-    <a href="../homepage.php">Terug naar start</a>
+    <a href="../homepage.php" class="Frr">Terug naar start</a>
+    </div>
 </body>
 </html>

@@ -12,10 +12,14 @@ a {
 }
 
 .container {
-  display: flex;
+  display: none;
   justify-content: center;
   gap: 20px;
   margin-top: 50px;
+}
+
+.riddle-container {
+  display: none;
 }
 
 
@@ -194,7 +198,7 @@ main {
   margin-bottom: 40px;
 }
 
-.buttons button {
+.buttons .subbtn {
   padding: 12px 20px;
   border-radius: 8px;
   border: 2px solid white;
@@ -203,6 +207,23 @@ main {
   font-size: 16px;
   cursor: pointer;
   backdrop-filter: blur(4px);
+}
+
+@keyframes shake {
+    0% { transform: translate(0px, 0px); }
+    25% { transform: translate(2px, -2px); }
+    50% { transform: translate(-2px, 2px); }
+    75% { transform: translate(2px, 2px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+.shake-btn:hover {
+    animation: shake 0.3s infinite;
+    background: rgba(0, 0, 0, 0.3)
+}
+
+.shake-btn:hover a {
+    color: red;
 }
 
 .page-header {
@@ -401,18 +422,16 @@ footer {
 }
 
 #timer {
-  position: absolute;
-  bottom: -364px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: yellow;
-  padding: 15px 40px;
-  font-size: 60px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  font-size: 20px;
   font-weight: bold;
-  border-radius: 12px;
+  border-radius: 8px;
   z-index: 1000;
-  letter-spacing: 4px;
 }
 
 .backbody {

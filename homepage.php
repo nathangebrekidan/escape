@@ -66,11 +66,9 @@
     </section>
 
     <section class="buttons">
-        <button>Difficulty</button>
-        <button class="shake-btn">
-            <a href="../escape/rooms/room_1.php">Start the escape</a>
-        </button>
-        <button>Clues</button>
+        <a href="#" class="subbtn">Difficulty</a>
+        <a href="../escape/rooms/room_1.php" class="subbtn shake-btn">Start the escape</a>
+        <a href="#" class="subbtn">Clues</a>
     </section>
 
     <section class="popup" id="popup">
