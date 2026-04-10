@@ -22,10 +22,10 @@
     <div class="logo">Escape room</div>
 
     <nav class="menu">
-        <button>Menu</button>
-        <button>Creators</button>
-        <button>Review</button>
-        <button>Account</button>
+        <a href="../escape/homepage.php">Menu</a>
+        <a href="">Creators</a>
+        <a href="">Review</a>
+        <a href="">Account</a>
     </nav>
 </header>
 
@@ -67,7 +67,9 @@
 
     <section class="buttons">
         <button>Difficulty</button>
-        <button>Start the escape</button>
+        <button class="shake-btn">
+            <a href="../escape/rooms/room_1.php">Start the escape</a>
+        </button>
         <button>Clues</button>
     </section>
 
