@@ -26,23 +26,6 @@ if ($left <= 0) {
 $q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3");
 $r = $q->fetchAll(PDO::FETCH_ASSOC);
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $ok = true;
-    // foreach ($r as $i => $v) {
-    //     if (strtolower($_POST["a$i"]) != strtolower($v['answer'])) {
-    //         $ok = false;
-    //     }
-    // }
-
-    if ($ok) {
-        unset($_SESSION['t3']);
-        header("Location: win_page.php");
-        exit;
-    } else {
-        $err = "Fout antwoord.";
-    }
-}
 ?>
 <html>
 <head>
@@ -68,7 +51,6 @@ function timer(){
 
 <div class="riddle-form">
   <h2>Tijd: <span id="tijd"></span></h2>
-  <?php if(isset($err)) echo "<p style='color:red;'>$err</p>"; ?>
 </div>
 
 <div class="container">
@@ -77,22 +59,55 @@ function timer(){
     <div class="vakje hidden" id="v3" onclick="show(2)">Raadsel C</div>
 </div>
 
-<form method="POST" id="f" class="hidden">
+<div id="f" class="hidden">
     <p id="vraag"></p>
-    <input type="text" id="inp" name="a0">
-    <button>Check</button>
-</form>
+    <input type="text" id="inp">
+    <button onclick="checkAnswer()">Check</button>
+    <p id="feedback"></p>
+</div>
 
 <script>
 let v = <?php echo json_encode($r); ?>;
+let current = 0;
+let solved = [false, false, false];
 
 function show(i){
+    current = i;
     document.getElementById("f").classList.remove("hidden");
     document.getElementById("vraag").innerHTML = v[i].riddle;
-    document.getElementById("inp").name = "a" + i;
+    document.getElementById("inp").value = '';
 
     if(i == 0) document.getElementById("v2").classList.remove("hidden");
     if(i == 1) document.getElementById("v3").classList.remove("hidden");
+}
+
+function checkAnswer() {
+    let userAnswer = document.getElementById('inp').value.trim();
+    let feedback = document.getElementById('feedback');
+
+    if (userAnswer.toLowerCase() === v[current].answer.toLowerCase()) {
+        solved[current] = true;
+        feedback.innerText = 'Correct!';
+        feedback.style.color = 'green';
+        document.getElementById("f").classList.add("hidden");
+        // Mark as solved
+        let vakje = document.querySelector(`.vakje[onclick*='show(${current})']`);
+        vakje.classList.add("solved");
+        vakje.onclick = null; // disable click
+
+        if (solved.every(s => s)) {
+            window.location.href = 'win_page.php';
+        } else {
+            // Auto show next if available
+            let next = current + 1;
+            if (next < 3 && !solved[next]) {
+                show(next);
+            }
+        }
+    } else {
+        feedback.innerText = 'Fout, probeer opnieuw!';
+        feedback.style.color = 'red';
+    }
 }
 </script>
 
