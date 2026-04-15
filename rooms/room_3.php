@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 }
-
+?>
 <html>
 <head>
 <link rel="stylesheet" href="../css/style.css?v=3">
