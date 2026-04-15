@@ -12,10 +12,14 @@ a {
 }
 
 .container {
-  display: flex;
+  display: none;
   justify-content: center;
   gap: 20px;
   margin-top: 50px;
+}
+
+.riddle-container {
+  display: none;
 }
 
 
@@ -95,7 +99,7 @@ main {
   color: lightblue;
 }
 
-.menu button {
+.menu a {
   background: #001a66;
   color: #66ccff;
   border: 2px solid #66ccff;
@@ -107,14 +111,14 @@ main {
   transition: 0.2s ease;
 }
 
-.menu button:hover {
+.menu a:hover {
   background: #66ccff;
   color: #001a66;
   border-color: #001a66;
   box-shadow: 0 0 10px #66ccff;
 }
 
-.menu button:active {
+.menu a:active {
   background: #000d33;
   color: #66ccff;
   border-color: #66ccff;
@@ -194,7 +198,7 @@ main {
   margin-bottom: 40px;
 }
 
-.buttons button {
+.buttons .subbtn {
   padding: 12px 20px;
   border-radius: 8px;
   border: 2px solid white;
@@ -203,6 +207,23 @@ main {
   font-size: 16px;
   cursor: pointer;
   backdrop-filter: blur(4px);
+}
+
+@keyframes shake {
+    0% { transform: translate(0px, 0px); }
+    25% { transform: translate(2px, -2px); }
+    50% { transform: translate(-2px, 2px); }
+    75% { transform: translate(2px, 2px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+.shake-btn:hover {
+    animation: shake 0.3s infinite;
+    background: rgba(0, 0, 0, 0.3)
+}
+
+.shake-btn:hover a {
+    color: red;
 }
 
 .page-header {
@@ -421,14 +442,6 @@ footer {
     height: 100%;
 }
 
-#room {
-    margin: 0;
-    padding: 0;
-    width: 1440px;
-    height: 900px;
-    background-image: url("../img/EscapeRoomBG.jpg");
-}
-
 .vakje {
   width: 120px;
   padding: 15px;
@@ -447,4 +460,245 @@ footer {
 
 .hidden {
   display: none;
+}
+
+.win-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    color: white;
+}
+
+.win-page main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.win-page h3 {
+    font-size: 50px;
+    margin: 0;
+    color: #ffe44a;
+}
+
+.win-page h5 {
+    font-size: 20px;
+    margin: 0;
+    color: #66ccff;
+}
+
+.lose-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    color: white;
+}
+
+.lose-page main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.lose-page h3 {
+    font-size: 50px;
+    margin: 0;
+    color: #ff6b6b;
+}
+
+.lose-page h5 {
+    font-size: 20px;
+    margin: 0;
+    color: #ff9999;
+}
+
+.win-page p,
+.lose-page p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.winlose_button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px;
+}
+
+.winlose_button:hover {
+    background: white;
+    color: darkblue;
+}
+
+#room {
+  display: flex;
+    margin: 0;
+    padding: 0;
+    width: 1540px;
+    height: 900px;
+    background-image: url("../img/EscapeRoomBG.png");
+}
+
+#room > * {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+#door {
+  top: 133px;
+  left: 16px;
+}
+
+#table {
+  top: 636px;
+  left: 1025px;
+  width: 464px;
+}
+
+#table_two {
+  top: 407px;
+  left: 0px;
+  width: 484px;
+}
+
+#lights {
+  top: 40px;
+  left: 202px;
+  width: 355px;
+  z-index: 1;
+}
+
+#lights_two {
+  top: 40px;
+  left: 962px;
+  width: 355px;
+  z-index: 1;
+}
+
+#lightshadow {
+  top: 24px;
+  left: 156px;
+  width: 452px;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+#lightshadow_two {
+  top: 24px;
+  left: 916px;
+  width: 452px;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+#safe_closed {
+  top: 458px;
+  left: 1189px;
+  width: 264px;
+}
+
+#safe_open {
+  top: 456px;
+  left: 1006px;
+  width: 454px;
+  visibility: hidden;
+}
+
+#keypad_locked {
+  top: 604px;
+  left: 820px;
+  width: 112px;
+}
+
+#keypad_unlocked {
+  top: 604px;
+  left: 820px;
+  width: 112px;
+  visibility: hidden;
+}
+
+#key_card {
+  top: 564px;
+  left: 1335px;
+  width: 112px;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+
+#locked_box {
+  top: 401px;
+  left: 56px;
+  width: 126px;
+}
+
+#opened_box {
+    top: 366px;
+    left: 62px;
+    width: 158px;
+    visibility: hidden;
+}
+
+#key {
+  top: 447px;
+  left: 197px;
+  width: 99px;
+  transform: rotate(84deg);
+  visibility: hidden;
+}
+
+#keypadmessage {
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  font-size: 20px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.5s ease;
+}
+
+#keypadmessage.show {
+  opacity: 1;
+}
+
+#lockpick {
+  top: 702px;
+  left: 1221px;
+  width: 89px;
+  transform: rotate(90deg);
+  z-index: 2;
+  visibility: hidden;
+}
+
+#drawer_closed {
+  top: 691px;
+  left: 1067px;
+  width: 408px;
+}
+
+#drawer_open {
+  top: 691px;
+  left: 1067px;
+  width: 408px;
+  visibility: hidden;
 }
