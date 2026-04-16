@@ -297,6 +297,10 @@ function tryLight() {
   showMessage("You look at the lights. It flickers for a moment, but nothing else happens.");
 }
 
+function tryRenote() {
+  showMessage("The note the researcher left behind for you.");
+}
+
 function tryNotes() {
   document.getElementById("notes-overlay").style.display = "block";
   document.getElementById("notes-modal").style.display = "block";
