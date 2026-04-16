@@ -29,16 +29,19 @@ $r = $q->fetchAll(PDO::FETCH_ASSOC);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $submitted_index = null;
-    foreach ($r as $i => $v) {
-        if (isset($_POST["a$i"])) {
-            $submitted_index = $i;
-            if (strtolower($_POST["a$i"]) == strtolower($v['answer'])) {
-                $_SESSION['solved_' . $i] = true;
-            } else {
-                $err = "Fout antwoord voor raadsel " . chr(65 + $i);
-            }
-            break;
+    $index = isset($_POST['index']) ? intval($_POST['index']) : null;
+    $answer = isset($_POST['answer']) ? trim($_POST['answer']) : '';
+
+    if ($index === null || !isset($r[$index])) {
+        $err = "Ongeldig raadsel.";
+    } elseif ($answer === '') {
+        $err = "Vul eerst een antwoord in.";
+    } else {
+        $correct = strtolower($r[$index]['answer']);
+        if (strtolower($answer) === $correct) {
+            $_SESSION['solved_' . $index] = true;
+        } else {
+            $err = "Fout antwoord voor raadsel " . chr(65 + $index);
         }
     }
 
@@ -66,7 +69,7 @@ function timer(){
 </script>
 </head>
 
-<body class="room-body" onload="timer(); show(0)">
+<body class="room-body" onload="timer()">
 
 <header class="page-header">
   <h1>Escape Room 3</h1>
@@ -79,31 +82,22 @@ function timer(){
 </div>
 
 <div class="container">
-    <div class="vakje <?php echo isset($_SESSION['solved_0']) ? 'solved' : ''; ?>" <?php echo !isset($_SESSION['solved_0']) ? 'onclick="show(0)" ondblclick="show(0)"' : ''; ?>>Raadsel A</div>
-    <div class="vakje <?php echo isset($_SESSION['solved_1']) ? 'solved' : ''; ?>" id="v2" <?php echo !isset($_SESSION['solved_1']) ? 'onclick="show(1)" ondblclick="show(1)"' : ''; ?>>Raadsel B</div>
-    <div class="vakje <?php echo isset($_SESSION['solved_2']) ? 'solved' : ''; ?>" id="v3" <?php echo !isset($_SESSION['solved_2']) ? 'onclick="show(2)" ondblclick="show(2)"' : ''; ?>>Raadsel C</div>
+    <?php foreach ($r as $i => $v): ?>
+        <div class="riddle-card <?php echo isset($_SESSION['solved_' . $i]) ? 'solved' : ''; ?>">
+            <h3>Raadsel <?php echo chr(65 + $i); ?></h3>
+            <p><?php echo htmlspecialchars($v['riddle']); ?></p>
+            <?php if (isset($_SESSION['solved_' . $i])): ?>
+                <p style="color: green; font-weight: bold;">Opgelost!</p>
+            <?php else: ?>
+            <form method="POST">
+                <input type="hidden" name="index" value="<?php echo $i; ?>">
+                <input type="text" name="answer" placeholder="Typ je antwoord" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                <button type="submit" style="background:#221e3f; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Check</button>
+            </form>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
 </div>
-<p style="margin: 16px 0 0; color: white; font-weight: bold;">Klik op een vakje om het raadsel te laten zien.</p>
-
-<form method="POST" id="f" class="hidden">
-    <p id="vraag"></p>
-    <input type="text" id="inp" name="a0">
-    <button type="submit">Check</button>
-</form>
-
-<script>
-let v = <?php echo json_encode($r); ?>;
-
-function show(i){
-    document.getElementById("f").classList.remove("hidden");
-    document.getElementById("vraag").innerHTML = v[i].riddle;
-    document.getElementById("inp").name = "a" + i;
-    document.getElementById("inp").value = '';
-
-    if(i == 0) document.getElementById("v2").classList.remove("hidden");
-    if(i == 1) document.getElementById("v3").classList.remove("hidden");
-}
-</script>
 
 <script src="../js/app.js"></script>
 
