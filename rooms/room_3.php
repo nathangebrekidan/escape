@@ -66,7 +66,7 @@ function timer(){
 </script>
 </head>
 
-<body class="room-body" onload="timer()">
+<body class="room-body" onload="timer(); show(0)">
 
 <header class="page-header">
   <h1>Escape Room 3</h1>
@@ -79,10 +79,11 @@ function timer(){
 </div>
 
 <div class="container">
-    <div class="vakje <?php echo isset($_SESSION['solved_0']) ? 'solved' : ''; ?>" <?php echo !isset($_SESSION['solved_0']) ? 'onclick="show(0)"' : ''; ?>>Raadsel A</div>
-    <div class="vakje <?php echo isset($_SESSION['solved_0']) ? '' : 'hidden'; ?> <?php echo isset($_SESSION['solved_1']) ? 'solved' : ''; ?>" id="v2" <?php echo !isset($_SESSION['solved_1']) ? 'onclick="show(1)"' : ''; ?>>Raadsel B</div>
-    <div class="vakje <?php echo isset($_SESSION['solved_1']) ? '' : 'hidden'; ?> <?php echo isset($_SESSION['solved_2']) ? 'solved' : ''; ?>" id="v3" <?php echo !isset($_SESSION['solved_2']) ? 'onclick="show(2)"' : ''; ?>>Raadsel C</div>
+    <div class="vakje <?php echo isset($_SESSION['solved_0']) ? 'solved' : ''; ?>" <?php echo !isset($_SESSION['solved_0']) ? 'onclick="show(0)" ondblclick="show(0)"' : ''; ?>>Raadsel A</div>
+    <div class="vakje <?php echo isset($_SESSION['solved_0']) ? '' : 'hidden'; ?> <?php echo isset($_SESSION['solved_1']) ? 'solved' : ''; ?>" id="v2" <?php echo !isset($_SESSION['solved_1']) ? 'onclick="show(1)" ondblclick="show(1)"' : ''; ?>>Raadsel B</div>
+    <div class="vakje <?php echo isset($_SESSION['solved_1']) ? '' : 'hidden'; ?> <?php echo isset($_SESSION['solved_2']) ? 'solved' : ''; ?>" id="v3" <?php echo !isset($_SESSION['solved_2']) ? 'onclick="show(2)" ondblclick="show(2)"' : ''; ?>>Raadsel C</div>
 </div>
+<p style="margin: 16px 0 0; color: white; font-weight: bold;">Klik op een vakje om het raadsel te laten zien.</p>
 
 <form method="POST" id="f" class="hidden">
     <p id="vraag"></p>
