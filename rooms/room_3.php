@@ -5,11 +5,7 @@ require_once('../dbcon.php');
 // Als je opnieuw start vanuit lose/win of handmatig refresh met restart-parameter.
 if (isset($_GET['restart']) && $_GET['restart'] === '1') {
     unset($_SESSION['t3']);
-    foreach (array_keys($_SESSION) as $key) {
-        if (strpos($key, 'solved_') === 0) {
-            unset($_SESSION[$key]);
-        }
-    }
+    unset($_SESSION['solved']);
 }
 
 if (!isset($_SESSION['t3'])) {
@@ -51,7 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $correct = strtolower($found['row']['answer']);
         if (strtolower($answer) === $correct) {
-            $_SESSION['solved_' . $found['row']['id']] = true;
+            if (!isset($_SESSION['solved']) || !is_array($_SESSION['solved'])) {
+                $_SESSION['solved'] = [];
+            }
+            $_SESSION['solved'][$found['row']['id']] = true;
         } else {
             $err = "Fout antwoord voor raadsel " . chr(65 + $found['index']);
         }
@@ -60,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if all riddles are solved
     $allSolved = true;
     foreach ($r as $row) {
-        if (!isset($_SESSION['solved_' . $row['id']])) {
+        if (!isset($_SESSION['solved'][$row['id']])) {
             $allSolved = false;
             break;
         }
@@ -68,9 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($allSolved) {
         unset($_SESSION['t3']);
-        foreach ($r as $row) {
-            unset($_SESSION['solved_' . $row['id']]);
-        }
+        unset($_SESSION['solved']);
         header("Location: win_page.php");
         exit;
     }
@@ -105,10 +102,10 @@ function timer(){
 
 <div class="container">
     <?php foreach ($r as $i => $v): ?>
-        <div class="riddle-card <?php echo isset($_SESSION['solved_' . $v['id']]) ? 'solved' : ''; ?>">
+        <div class="riddle-card <?php echo isset($_SESSION['solved'][$v['id']]) ? 'solved' : ''; ?>">
             <h3>Raadsel <?php echo chr(65 + $i); ?></h3>
             <p><?php echo htmlspecialchars($v['riddle']); ?></p>
-            <?php if (isset($_SESSION['solved_' . $v['id']])): ?>
+            <?php if (isset($_SESSION['solved'][$v['id']])): ?>
                 <p style="color: green; font-weight: bold;">Opgelost!</p>
             <?php else: ?>
             <form method="POST">
