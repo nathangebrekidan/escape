@@ -192,6 +192,11 @@ main {
   font-weight: bold;
 }
 
+.side-panel a:hover {
+  background: #ffcc00;
+  color: black;
+}
+
 .buttons {
   display: flex;
   gap: 20px;

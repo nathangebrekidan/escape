@@ -92,7 +92,7 @@ try {
   </section>
 
   <div class="video-wrapper">
-      <video autoplay muted loop playsinline id="bg-video" src="../Vids/Glitchbg.mp4"></video>
+      <video autoplay muted loop playsinline id="bg-video" src="../Vids/Glitchy_background.mp4"></video>
   </div>
 
 </body>
