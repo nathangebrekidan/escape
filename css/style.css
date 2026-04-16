@@ -12,39 +12,10 @@ a {
 }
 
 .container {
-  display: flex;
+  display: none;
   justify-content: center;
   gap: 20px;
   margin-top: 50px;
-  flex-wrap: wrap;
-}
-
-.riddle-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 20px;
-  width: 280px;
-  min-height: 220px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-  text-align: left;
-}
-
-.riddle-card h3 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-.riddle-card p {
-  color: #111;
-  line-height: 1.4;
-}
-
-.riddle-card form {
-  margin-top: 16px;
-}
-
-.solved {
-  border: 2px solid #28a745;
 }
 
 .riddle-container {
@@ -302,7 +273,7 @@ main {
 .riddle-form {
   max-width: 500px;
   margin: 22px auto;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.9);
   border-radius: 10px;
   padding: 18px;
   border: 1px solid #94b3ff;
@@ -313,34 +284,6 @@ main {
   margin-bottom: 12px;
   color: #1a1a1a;
   font-weight: 600;
-}
-
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.16);
-}
-
-.admin-table th,
-.admin-table td {
-  padding: 12px 14px;
-  border: 1px solid #d7dde9;
-  text-align: left;
-  vertical-align: top;
-}
-
-.admin-table th {
-  background: #221e3f;
-  color: white;
-}
-
-.admin-table tbody tr:nth-child(odd) {
-  background: #f7f9ff;
-}
-
-.admin-table tbody tr:hover {
-  background: #e9efff;
 }
 
 .riddle-form input {
@@ -372,13 +315,53 @@ main {
 }
 
 .popup-content {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  max-width: 80%;
+  position: relative;
+  background: linear-gradient(135deg, #f5ecd7 0%, #efe4c9 100%);
+  color: #2e2a22;
+  padding: 30px;
+  border-radius: 4px;
+  max-width: 600px;
   max-height: 80%;
   overflow: auto;
-  text-align: center;
+  text-align: left;
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.6;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  transform: rotate(-1deg);
+  animation: slideIn 0.4s ease;
+  scrollbar-width: none;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px) rotate(-3deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(-1deg);
+    opacity: 1;
+  }
+}
+
+.popup-content::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: #e6dcc2;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+.popup-text {
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.popup-content h2 {
+  font-size: 22px;
+  margin-top: 0;
 }
 
 .popup-image {
@@ -389,9 +372,12 @@ main {
 }
 
 .close-btn {
-  font-size: 28px;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
   cursor: pointer;
-  float: right;
+  color: #5a4a2f;
 }
 
 footer {
@@ -515,11 +501,6 @@ footer {
   background: #3b78bd;
 }
 
-.solved {
-  background: #28a745 !important;
-  color: white;
-}
-
 .hidden {
   display: none;
 }
@@ -611,6 +592,25 @@ footer {
     width: 1540px;
     height: 900px;
     background-image: url("../img/EscapeRoomBG.png");
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 5vh;
+  overflow: hidden;
+  position: relative;
+}
+
+#bg-vid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  object-position: center;
+  transform: scaleY(-1);
 }
 
 #room > * {
@@ -771,6 +771,13 @@ footer {
   width: 365px;
 }
 
+#researchernote {
+  top: 503px;
+  left: 7px;
+  width: 90px;
+  z-index: 2;
+}
+
 #cluenotes {
   top: 230px;
   left: 1026px;
@@ -818,12 +825,52 @@ footer {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  width: 320px;
+  padding: 20px;
+  background: #f6e27a;
+  color: #3a2f1b;
+  font-family: "Comic Sans MS", "Bradley Hand", cursive;
+  line-height: 1.5;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 20px rgba(0,0,0,0.1);
+  border: 1px solid #e1c95f;
+  border-radius: 6px;
   z-index: 101;
-  text-align: center;
+}
+
+.intro-modal::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(3deg);
+  width: 80px;
+  height: 20px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.intro-modal h2 {
+  margin-top: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.intro-modal p {
+  font-size: 15px;
+}
+
+.intro-modal button {
+  margin-top: 15px;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 16px;
+  color: #3a2f1b;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 :root {

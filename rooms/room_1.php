@@ -28,7 +28,7 @@ try {
 
 <section class="intro-modal" id="introModal">
   <h2>Hi again!</h2>
-  <p>As you can see the door infront of you now has a padlock on it. That's my doing. If you want to open it, you'll need to get the keycard out of the safe. In order for the other researchers to stay ingorant of your escape I have locked the way to get the keycard behind riddles. Get them all right and you'll be able to open the door. <br>
+  <p>As you can see the door infront of you now has a padlock on it. That's my doing. If you want to open it, you'll need to get the keycard out of the safe. In order for the other researchers to stay ingorant of your escape I have locked the way to get the keycard behind riddles. Get them all right and you'll be able to open the door. Same goes for the other rooms <br>
 <br>
  Goodluck!
 </p>
@@ -37,6 +37,7 @@ try {
 
 <div id="room">
   <img id="door" src="../img/Door.png" alt="Deur" onclick="tryDoor()">
+  <img id="researchernote" src="../img/Researcher_note.png" alt="Onderzoeker notitie" onclick="tryRenote()">
   <img id="table" src="../img/Tafel.png" alt="Table">
   <img id="table_two" src="../img/Tafel_2.png" alt="Tweede tafel">
   <img id="safe_closed" src="../img/Safe.png" alt="Kluis" onclick="trySafe()">
@@ -89,6 +90,10 @@ try {
     <button onclick="checkAnswer()">Verzenden</button>
     <p id="feedback"></p>
   </section>
+
+  <div class="video-wrapper">
+      <video autoplay muted loop playsinline id="bg-video" src="../Vids/Glitchbg.mp4"></video>
+  </div>
 
 </body>
 
