@@ -5,6 +5,7 @@ require_once('../dbcon.php');
 // Als je opnieuw start vanuit lose/win of handmatig refresh met restart-parameter.
 if (isset($_GET['restart']) && $_GET['restart'] === '1') {
     unset($_SESSION['t3']);
+    unset($_SESSION['solved_0'], $_SESSION['solved_1'], $_SESSION['solved_2']);
 }
 
 if (!isset($_SESSION['t3'])) {
@@ -28,19 +29,28 @@ $r = $q->fetchAll(PDO::FETCH_ASSOC);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $ok = true;
-    // foreach ($r as $i => $v) {
-    //     if (strtolower($_POST["a$i"]) != strtolower($v['answer'])) {
-    //         $ok = false;
-    //     }
-    // }
+    $index = isset($_POST['index']) ? intval($_POST['index']) : null;
+    $answer = isset($_POST['answer']) ? trim($_POST['answer']) : '';
 
-    if ($ok) {
+    if ($index === null || !isset($r[$index])) {
+        $err = "Ongeldig raadsel.";
+    } elseif ($answer === '') {
+        $err = "Vul eerst een antwoord in.";
+    } else {
+        $correct = strtolower($r[$index]['answer']);
+        if (strtolower($answer) === $correct) {
+            $_SESSION['solved_' . $index] = true;
+        } else {
+            $err = "Fout antwoord voor raadsel " . chr(65 + $index);
+        }
+    }
+
+    // Check if all riddles are solved
+    if (isset($_SESSION['solved_0']) && isset($_SESSION['solved_1']) && isset($_SESSION['solved_2'])) {
         unset($_SESSION['t3']);
+        unset($_SESSION['solved_0'], $_SESSION['solved_1'], $_SESSION['solved_2']);
         header("Location: win_page.php");
         exit;
-    } else {
-        $err = "Fout antwoord.";
     }
 }
 ?>
@@ -72,29 +82,22 @@ function timer(){
 </div>
 
 <div class="container">
-    <div class="vakje" onclick="show(0)">Raadsel A</div>
-    <div class="vakje hidden" id="v2" onclick="show(1)">Raadsel B</div>
-    <div class="vakje hidden" id="v3" onclick="show(2)">Raadsel C</div>
+    <?php foreach ($r as $i => $v): ?>
+        <div class="riddle-card <?php echo isset($_SESSION['solved_' . $i]) ? 'solved' : ''; ?>">
+            <h3>Raadsel <?php echo chr(65 + $i); ?></h3>
+            <p><?php echo htmlspecialchars($v['riddle']); ?></p>
+            <?php if (isset($_SESSION['solved_' . $i])): ?>
+                <p style="color: green; font-weight: bold;">Opgelost!</p>
+            <?php else: ?>
+            <form method="POST">
+                <input type="hidden" name="index" value="<?php echo $i; ?>">
+                <input type="text" name="answer" placeholder="Typ je antwoord" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                <button type="submit" style="background:#221e3f; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Check</button>
+            </form>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
 </div>
-
-<form method="POST" id="f" class="hidden">
-    <p id="vraag"></p>
-    <input type="text" id="inp" name="a0">
-    <button>Check</button>
-</form>
-
-<script>
-let v = <?php echo json_encode($r); ?>;
-
-function show(i){
-    document.getElementById("f").classList.remove("hidden");
-    document.getElementById("vraag").innerHTML = v[i].riddle;
-    document.getElementById("inp").name = "a" + i;
-
-    if(i == 0) document.getElementById("v2").classList.remove("hidden");
-    if(i == 1) document.getElementById("v3").classList.remove("hidden");
-}
-</script>
 
 <script src="../js/app.js"></script>
 

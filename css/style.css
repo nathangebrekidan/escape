@@ -12,10 +12,39 @@ a {
 }
 
 .container {
-  display: none;
+  display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.riddle-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  min-height: 220px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  text-align: left;
+}
+
+.riddle-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.riddle-card p {
+  color: #111;
+  line-height: 1.4;
+}
+
+.riddle-card form {
+  margin-top: 16px;
+}
+
+.solved {
+  border: 2px solid #28a745;
 }
 
 .riddle-container {
@@ -273,7 +302,7 @@ main {
 .riddle-form {
   max-width: 500px;
   margin: 22px auto;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   border-radius: 10px;
   padding: 18px;
   border: 1px solid #94b3ff;
@@ -284,6 +313,34 @@ main {
   margin-bottom: 12px;
   color: #1a1a1a;
   font-weight: 600;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.16);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 14px;
+  border: 1px solid #d7dde9;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background: #221e3f;
+  color: white;
+}
+
+.admin-table tbody tr:nth-child(odd) {
+  background: #f7f9ff;
+}
+
+.admin-table tbody tr:hover {
+  background: #e9efff;
 }
 
 .riddle-form input {
@@ -456,6 +513,11 @@ footer {
 
 .vakje:hover {
   background: #3b78bd;
+}
+
+.solved {
+  background: #28a745 !important;
+  color: white;
 }
 
 .hidden {
