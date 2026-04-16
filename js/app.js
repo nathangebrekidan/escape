@@ -296,3 +296,34 @@ function trySafe() {
 function tryLight() {
   showMessage("You look at the lights. It flickers for a moment, but nothing else happens.");
 }
+
+function tryNotes() {
+  document.getElementById("notes-overlay").style.display = "block";
+  document.getElementById("notes-modal").style.display = "block";
+}
+
+function closeNotes() {
+  document.getElementById("notes-overlay").style.display = "none";
+  document.getElementById("notes-modal").style.display = "none";
+}
+
+window.onload = function() {
+  document.getElementById('overlay').style.display = 'block';
+  document.getElementById('modal').style.display = 'block';
+  document.getElementById('riddle').innerText = "Welcome in Simlock! Riddle your way out.";
+};
+
+window.onload = function() {
+  document.getElementById('introOverlay').style.display = 'block';
+  document.getElementById('introModal').style.display = 'block';
+};
+
+function closeIntro() {
+  document.getElementById('introOverlay').style.display = 'none';
+  document.getElementById('introModal').style.display = 'none';
+}
+
+function tryStart() {
+  showMessage("Je moet eerst een team aanmaken voor je kan beginnen.");
+  return false;
+}

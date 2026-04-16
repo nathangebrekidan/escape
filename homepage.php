@@ -1,6 +1,15 @@
 <?php
+session_start();
+require_once '../escape/dbcon.php';
 
-?> 
+$hasTeam = false;
+
+if (isset($_SESSION['team_id'])) {
+  $stmt = $db_connection->prepare("SELECT * FROM teams WHERE id = ?");
+  $stmt->execute([$_SESSION['team_id']]);
+  $hasTeam = $stmt->rowCount() > 0;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,8 +67,9 @@
             </ul>
 
             <h3>Make your team</h3>
+            <br>
             <div>
-                <button>Make team</button>
+                <a href="../escape/team.php">Make team</a>
             </div>
         </aside>
 
@@ -67,8 +77,8 @@
 
     <section class="buttons">
         <a href="#" class="subbtn">Difficulty</a>
-        <a href="../escape/rooms/room_1.php" class="subbtn shake-btn">Start the escape</a>
-        <a href="#" class="subbtn">Clues</a>
+        <a href="../escape/rooms/room_1.php" class="subbtn shake-btn" onclick="<?php echo $hasTeam ? '' : 'return tryStart();' ?>">Start the escape</a>
+        <a href="#" class="subbtn">Credit</a>
     </section>
 
     <section class="popup" id="popup">

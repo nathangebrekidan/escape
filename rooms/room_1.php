@@ -24,6 +24,17 @@ try {
 
 <div id="timer">Loading...</div>
 
+<section class="intro-overlay" id="introOverlay"></section>
+
+<section class="intro-modal" id="introModal">
+  <h2>Hi again!</h2>
+  <p>As you can see the door infront of you now has a padlock on it. That's my doing. If you want to open it, you'll need to get the keycard out of the safe. In order for the other researchers to stay ingorant of your escape I have locked the way to get the keycard behind riddles. Get them all right and you'll be able to open the door. <br>
+<br>
+ Goodluck!
+</p>
+  <button onclick="closeIntro()">Start</button>
+</section>
+
 <div id="room">
   <img id="door" src="../img/Door.png" alt="Deur" onclick="tryDoor()">
   <img id="table" src="../img/Tafel.png" alt="Table">
@@ -43,7 +54,19 @@ try {
   <img id="lights_two" src="../img/Lights_two.png" alt="Tweede licht" onclick="tryLight()">
   <img id="lightshadow" src="../img/Light_shadow.png" alt="Schaduw van het licht">
   <img id="lightshadow_two" src="../img/Light_shadow_two.png" alt="Schaduw van het tweede licht">
+  <img id="noticeboard" src="../img/Notice_board.png" alt="Aankondigingsbord">
+  <img id="cluenotes" src="../img/Clue_notes.png" alt="Hints" onclick="tryNotes()">
 </div>
+
+<section class="overlay" id="notes-overlay" onclick="closeNotes()"></section>
+
+<section class="modal" id="notes-modal">
+  <h2>Hints</h2>
+  <p>Hint 1: Combinations of the same colors count as one</p>
+  <p>Hint 2: There is Ethanol in Alcohol.</p>
+  <p>Hint 3: Aantal codons dat start met T modulo 4</p>
+  <button onclick="closeNotes()">Close</button>
+</section>
 
 <p id="keypadmessage"></p>
 
