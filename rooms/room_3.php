@@ -2,6 +2,21 @@
 session_start();
 require_once('../dbcon.php');
 
+if (!isset($_SESSION['solved']) || !is_array($_SESSION['solved'])) {
+    $_SESSION['solved'] = [];
+}
+
+// Migratie van oude solved_ sessiesleutels als die nog bestaan.
+foreach (array_keys($_SESSION) as $key) {
+    if (strpos($key, 'solved_') === 0 && $key !== 'solved') {
+        $oldId = substr($key, 7);
+        if ($oldId !== '' && $_SESSION[$key]) {
+            $_SESSION['solved'][$oldId] = true;
+        }
+        unset($_SESSION[$key]);
+    }
+}
+
 // Als je opnieuw start vanuit lose/win of handmatig refresh met restart-parameter.
 if (isset($_GET['restart']) && $_GET['restart'] === '1') {
     unset($_SESSION['t3']);
@@ -45,12 +60,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($answer === '') {
         $err = "Vul eerst een antwoord in.";
     } else {
-        $correct = strtolower($found['row']['answer']);
-        if (strtolower($answer) === $correct) {
-            if (!isset($_SESSION['solved']) || !is_array($_SESSION['solved'])) {
-                $_SESSION['solved'] = [];
-            }
+        $correct = $found['row']['answer'];
+        $normalizedAnswer = mb_strtolower(trim(preg_replace('/\s+/', '', $answer)), 'UTF-8');
+        $normalizedCorrect = mb_strtolower(trim(preg_replace('/\s+/', '', $correct)), 'UTF-8');
+
+        if ($normalizedAnswer === $normalizedCorrect) {
             $_SESSION['solved'][$found['row']['id']] = true;
+
+            $allSolved = true;
+            foreach ($r as $row) {
+                if (!isset($_SESSION['solved'][$row['id']])) {
+                    $allSolved = false;
+                    break;
+                }
+            }
+
+            if ($allSolved) {
+                unset($_SESSION['t3']);
+                unset($_SESSION['solved']);
+                header("Location: win_page.php");
+                exit;
+            }
+
+            header("Location: room_3.php");
+            exit;
         } else {
             $err = "Fout antwoord voor raadsel " . chr(65 + $found['index']);
         }
