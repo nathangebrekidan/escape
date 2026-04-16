@@ -30,6 +30,7 @@
     
 
         <a href="../homepage.php" class="winlose_button">Back to homepage</a>
+        <a href="review.php" class="winlose_button">Review schrijven</a>
         <a href="../rooms/room_3.php?restart=1" class="winlose_button">Opnieuw starten kamer 3</a>
     </main>
 

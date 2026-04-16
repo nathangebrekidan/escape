@@ -273,7 +273,7 @@ main {
 .riddle-form {
   max-width: 500px;
   margin: 22px auto;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   border-radius: 10px;
   padding: 18px;
   border: 1px solid #94b3ff;
@@ -284,6 +284,34 @@ main {
   margin-bottom: 12px;
   color: #1a1a1a;
   font-weight: 600;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.16);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 14px;
+  border: 1px solid #d7dde9;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background: #221e3f;
+  color: white;
+}
+
+.admin-table tbody tr:nth-child(odd) {
+  background: #f7f9ff;
+}
+
+.admin-table tbody tr:hover {
+  background: #e9efff;
 }
 
 .riddle-form input {
