@@ -28,7 +28,7 @@ if ($left <= 0) {
 }
 
 
-$q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3");
+$q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3 ORDER BY id ASC");
 $r = $q->fetchAll(PDO::FETCH_ASSOC);
 
 
