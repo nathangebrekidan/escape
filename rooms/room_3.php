@@ -5,7 +5,7 @@ require_once('../dbcon.php');
 // Als je opnieuw start vanuit lose/win of handmatig refresh met restart-parameter.
 if (isset($_GET['restart']) && $_GET['restart'] === '1') {
     unset($_SESSION['t3']);
-    unset($_SESSION['solved_0'], $_SESSION['solved_1'], $_SESSION['solved_2']);
+    unset($_SESSION['solved']);
 }
 
 if (!isset($_SESSION['t3'])) {
@@ -24,31 +24,50 @@ if ($left <= 0) {
 }
 
 
-$q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3");
+$q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3 ORDER BY id ASC");
 $r = $q->fetchAll(PDO::FETCH_ASSOC);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $index = isset($_POST['index']) ? intval($_POST['index']) : null;
+    $riddleId = isset($_POST['riddle_id']) ? intval($_POST['riddle_id']) : null;
     $answer = isset($_POST['answer']) ? trim($_POST['answer']) : '';
 
-    if ($index === null || !isset($r[$index])) {
+    $found = null;
+    foreach ($r as $i => $v) {
+        if (intval($v['id']) === $riddleId) {
+            $found = ['index' => $i, 'row' => $v];
+            break;
+        }
+    }
+
+    if (!$found) {
         $err = "Ongeldig raadsel.";
     } elseif ($answer === '') {
         $err = "Vul eerst een antwoord in.";
     } else {
-        $correct = strtolower($r[$index]['answer']);
+        $correct = strtolower($found['row']['answer']);
         if (strtolower($answer) === $correct) {
-            $_SESSION['solved_' . $index] = true;
+            if (!isset($_SESSION['solved']) || !is_array($_SESSION['solved'])) {
+                $_SESSION['solved'] = [];
+            }
+            $_SESSION['solved'][$found['row']['id']] = true;
         } else {
-            $err = "Fout antwoord voor raadsel " . chr(65 + $index);
+            $err = "Fout antwoord voor raadsel " . chr(65 + $found['index']);
         }
     }
 
     // Check if all riddles are solved
-    if (isset($_SESSION['solved_0']) && isset($_SESSION['solved_1']) && isset($_SESSION['solved_2'])) {
+    $allSolved = true;
+    foreach ($r as $row) {
+        if (!isset($_SESSION['solved'][$row['id']])) {
+            $allSolved = false;
+            break;
+        }
+    }
+
+    if ($allSolved) {
         unset($_SESSION['t3']);
-        unset($_SESSION['solved_0'], $_SESSION['solved_1'], $_SESSION['solved_2']);
+        unset($_SESSION['solved']);
         header("Location: win_page.php");
         exit;
     }
@@ -83,14 +102,14 @@ function timer(){
 
 <div class="container">
     <?php foreach ($r as $i => $v): ?>
-        <div class="riddle-card <?php echo isset($_SESSION['solved_' . $i]) ? 'solved' : ''; ?>">
+        <div class="riddle-card <?php echo isset($_SESSION['solved'][$v['id']]) ? 'solved' : ''; ?>">
             <h3>Raadsel <?php echo chr(65 + $i); ?></h3>
             <p><?php echo htmlspecialchars($v['riddle']); ?></p>
-            <?php if (isset($_SESSION['solved_' . $i])): ?>
+            <?php if (isset($_SESSION['solved'][$v['id']])): ?>
                 <p style="color: green; font-weight: bold;">Opgelost!</p>
             <?php else: ?>
             <form method="POST">
-                <input type="hidden" name="index" value="<?php echo $i; ?>">
+                <input type="hidden" name="riddle_id" value="<?php echo $v['id']; ?>">
                 <input type="text" name="answer" placeholder="Typ je antwoord" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #ccc;">
                 <button type="submit" style="background:#221e3f; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Check</button>
             </form>
