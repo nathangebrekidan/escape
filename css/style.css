@@ -12,10 +12,61 @@ a {
 }
 
 .container {
-  display: none;
+  display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 50px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.riddle-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  padding: 22px;
+  width: 300px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+  text-align: left;
+  color: #111;
+}
+
+.riddle-card h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.riddle-card p {
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.riddle-card form {
+  margin-top: 10px;
+}
+
+.riddle-card input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  background: #f8f8f8;
+  color: #111;
+}
+
+.riddle-card button {
+  width: 100%;
+  background: #221e3f;
+  color: #fff;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.solved {
+  background: #2a9d2d;
+  color: white;
 }
 
 .riddle-container {
@@ -298,6 +349,183 @@ main {
   border-radius: 8px;
   border: 1px solid #a0b3cd;
   font-size: 16px;
+}
+
+.review-page {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px 60px;
+  background: #080b17;
+}
+
+.review-panel {
+  width: 420px;
+  background: #10172e;
+  border: 1px solid #2a3351;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+}
+
+.review-panel h2 {
+  margin-top: 0;
+  color: #ffcf02;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.review-panel label {
+  display: block;
+  margin: 18px 0 8px;
+  color: #c7d0ff;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.review-panel select,
+.review-panel textarea,
+.review-panel input[type="text"] {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #2a3351;
+  background: #121d3b;
+  color: #f4f7ff;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.review-panel textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.review-panel button {
+  width: 100%;
+  margin-top: 18px;
+  background: #ffcf02;
+  color: #111;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-panel button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255,207,2,0.25);
+}
+
+.review-panel .success-message,
+.review-panel .error-message {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.review-panel .success-message {
+  background: rgba(46, 173, 103, 0.16);
+  color: #a2f59e;
+}
+
+.review-panel .error-message {
+  background: rgba(204, 61, 61, 0.16);
+  color: #ffb3b3;
+}
+
+.review-back-link {
+  margin-top: 20px;
+}
+
+.review-back-link a {
+  color: #ffcf02;
+  text-decoration: none;
+}
+
+.admin-review-page {
+  min-height: calc(100vh - 120px);
+  background: #070912;
+  padding: 40px 20px 60px;
+}
+
+.admin-review-page main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-table-wrapper {
+  overflow-x: auto;
+  border-radius: 18px;
+  background: #111625;
+  padding: 18px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #f7f7f7;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 14px 16px;
+  border: 1px solid #1f2641;
+}
+
+.admin-table th {
+  background: #ffdd00;
+  color: #111;
+  text-align: left;
+}
+
+.admin-table tr {
+  background: rgba(255,255,255,0.03);
+}
+
+.admin-table tr:nth-child(even) {
+  background: rgba(255,255,255,0.05);
+}
+
+.admin-table td {
+  vertical-align: top;
+}
+
+.admin-review-page .page-header {
+  background: transparent;
+  text-align: left;
+  padding: 0 0 18px;
+  box-shadow: none;
+}
+
+.admin-review-page .page-header h1 {
+  color: #ffd400;
+}
+
+.admin-review-page .page-header p {
+  color: #aeb3d9;
+}
+
+.review-page .page-header {
+  background: transparent;
+  text-align: left;
+  padding: 0 0 18px;
+  box-shadow: none;
+}
+
+.review-page .page-header h1 {
+  color: #ffcf02;
+}
+
+.review-page .page-header p {
+  color: #c7d0ff;
 }
 
 .room-body {

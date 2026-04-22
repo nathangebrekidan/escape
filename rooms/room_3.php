@@ -116,7 +116,7 @@ function timer(){
     document.getElementById("tijd").innerHTML = t;
     if(t <= 0) location = "lose_page.php";
     t--;
-    setTimeout(timer, 1000);
+    setTimeout(timer, 500);
 }
 </script>
 </head>

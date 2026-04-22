@@ -57,40 +57,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p>Team: <?php echo htmlspecialchars($teamName); ?></p>
 </header>
 
-<div class="riddle-form" style="max-width:600px; margin-bottom:50px;">
-    <h2>Laat een review achter</h2>
-    <?php if ($success): ?>
-        <p style="color:green; font-weight:bold;"><?php echo htmlspecialchars($success); ?></p>
-    <?php endif; ?>
-    <?php if ($error): ?>
-        <p style="color:red; font-weight:bold;"><?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
-    <form method="POST">
-        <input type="hidden" name="room_id" value="3">
-        <label for="rating">Beoordeling (1 t/m 5)</label><br>
-        <select id="rating" name="rating" style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px;">
-            <option value="0">-- Kies --</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
+<div class="review-page">
+    <div class="review-panel">
+        <h2>Laat een review achter</h2>
+        <?php if ($success): ?>
+            <p class="success-message"><?php echo htmlspecialchars($success); ?></p>
+        <?php endif; ?>
+        <?php if ($error): ?>
+            <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
+        <form method="POST">
+            <input type="hidden" name="room_id" value="3">
 
-        <label for="difficulty">Moeilijkheid</label><br>
-        <select id="difficulty" name="difficulty" style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px;">
-            <option value="">-- Kies --</option>
-            <option value="makkelijk">Makkelijk</option>
-            <option value="normaal">Normaal</option>
-            <option value="moeilijk">Moeilijk</option>
-        </select>
+            <label for="rating">Beoordeling (1 t/m 5)</label>
+            <select id="rating" name="rating">
+                <option value="0">-- Kies --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
-        <label for="feedback">Review</label><br>
-        <textarea id="feedback" name="feedback" rows="5" style="width:100%; padding:10px; margin-bottom:14px; border-radius:8px; resize: vertical;"></textarea>
+            <label for="difficulty">Moeilijkheid</label>
+            <select id="difficulty" name="difficulty">
+                <option value="">-- Kies --</option>
+                <option value="makkelijk">Makkelijk</option>
+                <option value="normaal">Normaal</option>
+                <option value="moeilijk">Moeilijk</option>
+            </select>
 
-        <button type="submit" style="background:#221e3f; color:white; border:none; padding:12px 18px; border-radius:8px; cursor:pointer;">Review opslaan</button>
-    </form>
-    <p style="margin-top:16px;"><a href="win_page.php" style="color:#221e3f;">Terug naar winpagina</a></p>
+            <label for="feedback">Review</label>
+            <textarea id="feedback" name="feedback" rows="5"></textarea>
+
+            <button type="submit">Review opslaan</button>
+        </form>
+        <p class="review-back-link"><a href="win_page.php">Terug naar winpagina</a></p>
+    </div>
 </div>
 
 <footer style="text-align:center; margin-top:50px; color:#555;">&copy; 2026 Abenezer, Yannick & Nathan</footer>

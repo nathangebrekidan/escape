@@ -31,38 +31,42 @@ $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <p>Hier zie je alle reviews die door teams zijn achtergelaten.</p>
 </header>
 
-<main style="width:95%; max-width:1100px; margin: 0 auto 50px;">
-    <?php if (count($reviews) === 0): ?>
-        <p>Er zijn nog geen reviews toegevoegd.</p>
-    <?php else: ?>
-        <table class="admin-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Team</th>
-                    <th>Room</th>
-                    <th>Rating</th>
-                    <th>Moeilijkheid</th>
-                    <th>Review</th>
-                    <th>Datum</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($reviews as $review): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($review['id']); ?></td>
-                        <td><?php echo htmlspecialchars($review['team_name']); ?></td>
-                        <td><?php echo htmlspecialchars($review['room_id']); ?></td>
-                        <td><?php echo htmlspecialchars($review['rating']); ?> / 5</td>
-                        <td><?php echo htmlspecialchars($review['difficulty']); ?></td>
-                        <td><?php echo nl2br(htmlspecialchars($review['feedback'])); ?></td>
-                        <td><?php echo htmlspecialchars($review['created_at']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
-</main>
+<div class="admin-review-page">
+    <main>
+        <?php if (count($reviews) === 0): ?>
+            <p>Er zijn nog geen reviews toegevoegd.</p>
+        <?php else: ?>
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Team</th>
+                            <th>Room</th>
+                            <th>Rating</th>
+                            <th>Moeilijkheid</th>
+                            <th>Review</th>
+                            <th>Datum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($reviews as $review): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($review['id']); ?></td>
+                                <td><?php echo htmlspecialchars($review['team_name']); ?></td>
+                                <td><?php echo htmlspecialchars($review['room_id']); ?></td>
+                                <td><?php echo htmlspecialchars($review['rating']); ?> / 5</td>
+                                <td><?php echo htmlspecialchars($review['difficulty']); ?></td>
+                                <td><?php echo nl2br(htmlspecialchars($review['feedback'])); ?></td>
+                                <td><?php echo htmlspecialchars($review['created_at']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </main>
+</div>
 
 <footer style="text-align:center; color:#999; padding:20px 0;">&copy; 2026 Abenezer, Yannick & Nathan</footer>
 </body>
