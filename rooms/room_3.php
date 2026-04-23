@@ -1,4 +1,5 @@
-<?php
+Je wilt de teksten in de pagina aanpassen zodat het meer een Rotterdamse sfeer heeft en spannender aanvoelt. Hier is de volledige code:
+php<?php
 session_start();
 require_once('../dbcon.php');
 
@@ -52,9 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (!$found) {
-        $err = "Ongeldig raadsel.";
+        $err = "Ongeldig raadsel, probeer het opnieuw.";
     } elseif ($answer === '') {
-        $err = "Vul eerst een antwoord in.";
+        $err = "Vul eerst een antwoord in, de klok tikt!";
     } else {
         $correct = $found['row']['answer'];
         $normalizedAnswer = mb_strtolower(trim(preg_replace('/\s+/', '', $answer)), 'UTF-8');
@@ -81,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: room_3.php");
             exit;
         } else {
-            $err = "Fout antwoord voor raadsel " . chr(65 + $found['index']);
+            $err = "Fout antwoord voor raadsel " . chr(65 + $found['index']) . " — Rotterdam vergeeft niet!";
         }
     }
 
@@ -108,7 +109,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 let t = <?php echo $left; ?>;
 
 function timer(){
-    document.getElementById("tijd").innerHTML = t;
+    let minuten = Math.floor(t / 60);
+    let seconden = t % 60;
+    let display = minuten + ":" + (seconden < 10 ? "0" : "") + seconden;
+    document.getElementById("tijd").innerHTML = display;
     if(t <= 0) location = "lose_page.php";
     t--;
     setTimeout(timer, 1000);
@@ -119,27 +123,27 @@ function timer(){
 <body class="room-body" onload="timer()">
 
 <header class="page-header">
-  <h1>Escape Room 3</h1>
-  <p>Laatste kamer, ultime kans. Een fout is kostbaar.</p>
+  <h1>🔒 Eindstation Rotterdam</h1>
+  <p>Je zit opgesloten in het hart van de Maasstad. Geen genade, geen tweede kansen. Kraak de codes of Rotterdam slikt je op.</p>
 </header>
 
 <div class="riddle-form">
-  <h2>Tijd: <span id="tijd"></span></h2>
-  <?php if(isset($err)) echo "<p style='color:red;'>$err</p>"; ?>
+  <h2>⏱ Tijd over: <span id="tijd"></span></h2>
+  <?php if(isset($err)) echo "<p style='color:red;font-weight:bold;'>⚠️ $err</p>"; ?>
 </div>
 
 <div class="container">
     <?php foreach ($r as $i => $v): ?>
         <div class="riddle-card <?php echo isset($_SESSION['solved'][$v['id']]) ? 'solved' : ''; ?>">
-            <h3>Raadsel <?php echo chr(65 + $i); ?></h3>
+            <h3>🧩 Raadsel <?php echo chr(65 + $i); ?></h3>
             <p><?php echo htmlspecialchars($v['riddle']); ?></p>
             <?php if (isset($_SESSION['solved'][$v['id']])): ?>
-                <p style="color: green; font-weight: bold;">Opgelost!</p>
+                <p style="color: green; font-weight: bold;">✅ Opgelost! Goed bezig, Rotterdammer!</p>
             <?php else: ?>
             <form method="POST">
                 <input type="hidden" name="riddle_id" value="<?php echo $v['id']; ?>">
-                <input type="text" name="answer" placeholder="Typ je antwoord" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #ccc;">
-                <button type="submit" style="background:#221e3f; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Check</button>
+                <input type="text" name="answer" placeholder="Typ je antwoord... de tijd loopt!" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                <button type="submit" style="background:#221e3f; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">🔓 Check</button>
             </form>
             <?php endif; ?>
         </div>
