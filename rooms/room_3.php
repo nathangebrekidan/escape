@@ -1,4 +1,4 @@
-php<?php
+<?php
 session_start();
 require_once('../dbcon.php');
 
@@ -36,10 +36,8 @@ if ($left <= 0) {
     exit;
 }
 
-
 $q = $db_connection->query("SELECT * FROM riddles WHERE roomId = 3 ORDER BY id ASC");
 $r = $q->fetchAll(PDO::FETCH_ASSOC);
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $riddleId = isset($_POST['riddle_id']) ? intval($_POST['riddle_id']) : null;
