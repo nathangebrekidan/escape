@@ -1,4 +1,4 @@
-<?php
+php<?php
 session_start();
 require_once('../dbcon.php');
 
@@ -6,7 +6,6 @@ if (!isset($_SESSION['solved']) || !is_array($_SESSION['solved'])) {
     $_SESSION['solved'] = [];
 }
 
-// Migratie van oude solved_ sessiesleutels als die nog bestaan.
 foreach (array_keys($_SESSION) as $key) {
     if (strpos($key, 'solved_') === 0 && $key !== 'solved') {
         $oldId = substr($key, 7);
@@ -17,7 +16,6 @@ foreach (array_keys($_SESSION) as $key) {
     }
 }
 
-// Als je opnieuw start vanuit lose/win of handmatig refresh met restart-parameter.
 if (isset($_GET['restart']) && $_GET['restart'] === '1') {
     unset($_SESSION['t3']);
     unset($_SESSION['solved']);
@@ -27,7 +25,7 @@ if (!isset($_SESSION['t3'])) {
     $_SESSION['t3'] = time();
 }
 
-$left = 90 - (time() - $_SESSION['t3']);
+$left = 300 - (time() - $_SESSION['t3']);
 if ($left < 0) {
     $left = 0;
 }
@@ -89,7 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Check if all riddles are solved
     $allSolved = true;
     foreach ($r as $row) {
         if (!isset($_SESSION['solved'][$row['id']])) {
@@ -116,7 +113,7 @@ function timer(){
     document.getElementById("tijd").innerHTML = t;
     if(t <= 0) location = "lose_page.php";
     t--;
-    setTimeout(timer, 500);
+    setTimeout(timer, 1000);
 }
 </script>
 </head>
