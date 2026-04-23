@@ -64,7 +64,7 @@ function openRiddle(riddleId) {
     if (solvedRiddles.has(riddleId) || !gameActive) return;
 
     currentRiddleId = riddleId;
-    const riddle = riddles.find(r => parseInt(r.id) === riddleId);
+    const riddle = riddles.find(r => parseInt(r.id) === parseInt(riddleId));
     
     if (!riddle) {
         console.error('Riddle not found:', riddleId);
@@ -88,7 +88,7 @@ function closeRiddle() {
 function checkRiddleAnswer() {
     if (!currentRiddleId) return;
 
-    const riddle = riddles.find(r => r.id === currentRiddleId);
+    const riddle = riddles.find(r => parseInt(r.id) === parseInt(currentRiddleId));
     const userAnswer = document.getElementById('riddleAnswer').value.trim().toLowerCase();
     const correctAnswer = riddle.answer.toLowerCase();
 
@@ -167,9 +167,31 @@ function showSuccessScreen() {
     successScreen.classList.add('show');
 }
 
+function redirectToRoom3() {
+    window.location.href = '../rooms/room_3.php';
+}
+
 function showGameOver() {
     alert('Time is up! You did not escape the library.');
     window.location.href = '../rooms/lose_page.php';
+}
+
+function toggleNote() {
+    const letterContent = document.getElementById('letterContent');
+    const keyContent = document.getElementById('keyContent');
+    
+    if (letterContent.style.display === 'block') {
+        letterContent.style.display = 'none';
+        keyContent.style.display = 'block';
+    } else {
+        letterContent.style.display = 'block';
+        keyContent.style.display = 'none';
+    }
+}
+
+function closeLetter() {
+    const notePaper = document.getElementById('notePaper');
+    notePaper.style.display = 'none';
 }
 
 document.addEventListener('keydown', (e) => {

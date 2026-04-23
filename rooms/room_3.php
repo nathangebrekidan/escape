@@ -476,7 +476,7 @@ $procent = $totaal > 0 ? round(($opgelost / $totaal) * 100) : 0;
                         <button type="submit">🔐 Controleer</button>
                     </form>
                 </div>
-            <?<?php endif; ?>
+            <?php endif; ?>
         </div>
     <?php endforeach; ?>
 </div>

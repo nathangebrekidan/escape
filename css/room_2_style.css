@@ -156,12 +156,6 @@ body {
     animation: pulse 0.5s infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-
 .note-paper {
     position: absolute;
     bottom: 30px;
@@ -173,7 +167,7 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     z-index: 10;
     border: 2px solid #8B4513;
-    cursor: pointer;
+    cursor: default;
     transition: transform 0.3s ease;
 }
 
@@ -192,6 +186,49 @@ body {
     font-size: 12px;
     color: #654321;
     margin-bottom: 15px;
+}
+
+.note-text {
+    font-size: 13px;
+    color: #3a2a1a;
+    line-height: 1.5;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.letter-toggle {
+    width: 100%;
+    background: #8B4513;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.letter-toggle:hover {
+    background: #654321;
+    transform: scale(1.02);
+}
+
+.close-letter {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #8B4513;
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.close-letter:hover {
+    color: #FF0000;
+    transform: scale(1.2);
 }
 
 .book-sequence {

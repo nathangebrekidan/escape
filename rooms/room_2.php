@@ -54,9 +54,29 @@ try {
         </div>
 
         <div class="note-paper" id="notePaper">
-            <p class="note-title">Library Key</p>
-            <p class="note-hint">Find books in order:</p>
-            <div id="bookSequence" class="book-sequence"></div>
+            <span class="close-letter" onclick="closeLetter()">&times;</span>
+            <div id="letterContent" style="display: block;">
+                <p class="note-title">📖 A Letter from the Librarian</p>
+                <p class="note-text" style="font-size: 13px; color: #3a2a1a; line-height: 1.5; text-align: left;">
+                    Dear Visitor,<br><br>
+                    Welcome to our ancient library. The books on these shelves hold the keys to your freedom. Each book contains a riddle hidden within its pages.<br><br>
+                    <strong>How to escape:</strong><br>
+                    • Click on any colored book to reveal its riddle<br>
+                    • Solve each riddle by typing your answer<br>
+                    • Collect all the books' answers to unlock the door<br>
+                    • The sequence of books is your guide to victory<br><br>
+                    <em>Time is your enemy. You have 10 minutes.</em><br><br>
+                    Good luck!<br>
+                    - The Keeper of Secrets
+                </p>
+                <button class="letter-toggle" onclick="toggleNote()">See Book Sequence</button>
+            </div>
+            <div id="keyContent" style="display: none;">
+                <p class="note-title">📚 Library Key</p>
+                <p class="note-hint">Find books in order:</p>
+                <div id="bookSequence" class="book-sequence"></div>
+                <button class="letter-toggle" onclick="toggleNote()">Back to Letter</button>
+            </div>
         </div>
 
         <div class="riddles-container" style="display: none;"></div>
@@ -78,7 +98,7 @@ try {
             <h1>Door Unlocked!</h1>
             <p>You escaped the library!</p>
             <p id="timeScore"></p>
-            <button onclick="window.location.href='../homepage.php'">Back to Home</button>
+            <button onclick="redirectToRoom3()">Enter Room 3</button>
         </div>
     </div>
 </div>
